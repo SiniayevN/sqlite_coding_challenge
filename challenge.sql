@@ -22,3 +22,29 @@ JOIN products p
   ON p.id = oi.product_id
 GROUP BY p.category
 ORDER BY revenue DESC;
+
+--TASK 3
+
+SELECT
+  e.first_name,
+  e.last_name,
+  d.name AS department_name,
+  e.salary,
+  (
+    SELECT AVG(e2.salary)
+    FROM employees e2
+    WHERE e2.department_id = e.department_id
+  ) AS department_avg_salary
+FROM employees e
+JOIN departments d
+  ON d.id = e.department_id
+WHERE e.salary >
+  (
+    SELECT AVG(e2.salary)
+    FROM employees e2
+    WHERE e2.department_id = e.department_id
+  )
+ORDER BY
+  department_name,
+  e.salary DESC;
+
