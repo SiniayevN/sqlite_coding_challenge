@@ -48,3 +48,12 @@ ORDER BY
   department_name,
   e.salary DESC;
 
+--TASK 4
+
+SELECT
+  city,
+  COUNT(*) AS gold_customer_count
+FROM customers
+WHERE loyalty_level = 'Gold'
+GROUP BY city
+ORDER BY gold_customer_count DESC, city;
